@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -74,6 +75,11 @@ namespace Infraestructure.Productos
             int index = GetIndexById(id);            
 
             return index <= 0 ? null : productos[index];
+        }
+
+        public Producto[] GetProductosByUnidadMedida(UnidadMedida um)
+        {
+            return null;
         }
         #endregion
 
