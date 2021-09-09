@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -87,6 +88,50 @@ namespace Infraestructure.Productos
                 }
             }
             return tmp;
+        }
+
+        public Producto[] GetProductosByRangoPrecio(decimal from, decimal to)
+        {
+            Producto[] tmp = null;
+            if (productos == null)
+            {
+                return tmp;
+            }
+            foreach (Producto p in productos)
+            {
+                if (p.Precio >= from && p.Precio <= to)
+                {
+                    Add(p, ref tmp);
+                }
+            }
+            return tmp;
+        }
+
+        public Producto[] GetProductosByVencimiento(DateTime dt)
+        {
+            Producto[] tmp = null;
+            if (productos == null)
+            {
+                return tmp;
+            }
+            foreach (Producto p in productos)
+            {
+                if (p.FechaVencimiento.CompareTo(dt) <= 0)
+                {
+                    Add(p, ref tmp);
+                }
+            }
+            return tmp;
+        }
+
+        public int GetLastProductoId()
+        {
+            return productos == null ? 0 : productos[productos.Length - 1].Id;
+        }
+
+        public string GetProductosAsJson()
+        {
+            return JsonConvert.SerializeObject(productos);
         }
         #endregion
 
