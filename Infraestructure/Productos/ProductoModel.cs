@@ -142,6 +142,11 @@ namespace Infraestructure.Productos
             return JsonConvert.SerializeObject(productos);
         }
 
+        public int GetLastProductoId()
+        {
+            return productos == null ? 0 : productos[productos.Length -1].Id;
+        }
+
         #endregion
 
         #region Private Method
