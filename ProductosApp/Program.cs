@@ -17,7 +17,7 @@ namespace ProductosApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmProductManage());
+            Application.Run(new GestionEmpleado());
         }
     }
 }

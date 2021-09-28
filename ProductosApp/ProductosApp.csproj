@@ -61,6 +61,12 @@
     <Compile Include="Forms\FrmProducto.Designer.cs">
       <DependentUpon>FrmProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\GestionEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GestionEmpleado.Designer.cs">
+      <DependentUpon>GestionEmpleado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FrmProductManage.resx">
@@ -68,6 +74,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmProducto.resx">
       <DependentUpon>FrmProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GestionEmpleado.resx">
+      <DependentUpon>GestionEmpleado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
