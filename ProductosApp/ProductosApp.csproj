@@ -55,6 +55,12 @@
     <Compile Include="Formularios\FrmGestionEmpleados.Designer.cs">
       <DependentUpon>FrmGestionEmpleados.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\FrmProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Formularios\FrmGestionEmpleados.resx">
       <DependentUpon>FrmGestionEmpleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\FrmProducto.resx">
       <DependentUpon>FrmProducto.cs</DependentUpon>

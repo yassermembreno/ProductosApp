@@ -8,19 +8,15 @@ namespace Domain.Entities.Empleados
     public class EmpleadoDocente : Empleado
     {
         public TipoContratacion TipoContratacion { get; set; }
-        public EmpleadoDocente(int codigo, string nombres, string apellidos, string nid) : base(codigo,nombres,apellidos,nid)
+        public EmpleadoDocente(int codigo, string cedula, string nombres, string apellidos, decimal salario, DateTime fechaContratacion) : base(codigo, cedula, nombres,  apellidos,  salario,  fechaContratacion)
         {
 
         }
 
-        public override string PrintEmpleado()
+       
+        public override string GetEmpleadoAsString()
         {
-            return $"Codigo:{Codigo}, Nombres{Nombres}, Apellidos:{Apellidos}, Cedula:{NumeroIdentificacion}";
-        }
-
-        public override string PrintEmpleadoV2()
-        {
-            return $"{base.PrintEmpleadoV2()}, Nombres:{Nombres}";
+            throw new NotImplementedException();
         }
     }
 }
