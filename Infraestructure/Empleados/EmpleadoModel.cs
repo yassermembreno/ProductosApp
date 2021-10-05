@@ -1,17 +1,19 @@
 ﻿using Domain.Entities.Empleados;
+using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Infraestructure.Empleados
 {
-    public class EmpleadoModel
+    public class EmpleadoModel : IEmpleadoModel
     {
         private Empleado[] empleados;
 
-        public void Create(Empleado e)
+        #region Private Methods
+        public void Add(Empleado e)
         {
-            if(empleados == null)
+            if (empleados == null)
             {
                 empleados = new Empleado[1];
                 empleados[0] = e;
@@ -25,11 +27,66 @@ namespace Infraestructure.Empleados
             empleados = temp;
         }
 
+        private int GetIndex(int Id)
+        {
+            int index = int.MinValue, i = 0;
+            
+            foreach (Empleado emp in empleados)
+            {
+                if(emp.Id == Id)
+                {
+                    index = i;
+                    break;
+                }
+
+                i++;
+            }
+
+            return index;
+        }
+
+        #endregion
         public int GetLastEmpleadoId()
         {
             return empleados == null ? 0 : empleados[empleados.Length - 1].Id;
         }
         public Empleado[] GetEmpleados()
+        {
+            return empleados;
+        }
+        
+        public Empleado FindById(int id)
+        {
+            if(empleados == null)
+            {
+                return null;
+            }
+
+            if(id < 0 || id > empleados.Length)
+            {
+                return null;
+            }
+
+            int index = GetIndex(id);
+            return index < 0 ? null : empleados[index];
+        }
+
+        public void Create(Empleado t)
+        {
+            Add(t);
+        }
+
+        public int Update(Empleado t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(Empleado t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Empleado[] FindAll()
         {
             return empleados;
         }

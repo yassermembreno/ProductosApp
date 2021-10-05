@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppCore.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,14 +14,16 @@ namespace ProductosApp.Formularios
     public partial class FrmMain : Form
     {
         private Form activeForm;
-        public FrmMain()
+        private IEmpleadoServices empleadoServices;
+        public FrmMain(IEmpleadoServices empleadoServices)
         {
+            this.empleadoServices = empleadoServices;
             InitializeComponent();
         }
 
         private void btnEmpleados_Click(object sender, EventArgs e)
         {
-            FrmGestionEmpleados frmGestionEmpleados = new FrmGestionEmpleados();
+            FrmGestionEmpleados frmGestionEmpleados = new FrmGestionEmpleados(empleadoServices);
             ShowActiveForm(frmGestionEmpleados);
         }
 
