@@ -1,23 +1,17 @@
-﻿using Domain.Entities.Empleados;
+﻿using AppCore.Interfaces;
+using Domain.Entities.Empleados;
 using Infraestructure.Empleados;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProductosApp.Formularios
 {
     public partial class FrmGestionEmpleados : Form
     {
-        private EmpleadoModel empleadoModel;
-        public FrmGestionEmpleados()
+        private IEmpleadoService empleadoService;
+        public FrmGestionEmpleados(IEmpleadoService empleadoService)
         {
-            empleadoModel = new EmpleadoModel();
+            this.empleadoService = empleadoService;
             InitializeComponent();
         }
 
@@ -27,10 +21,10 @@ namespace ProductosApp.Formularios
                 "Perez Soza", 23786.98M, DateTime.Now)
             {
                 CategoriaDocente = Domain.Enums.CategoriaDocente.Titular,
-                Id = empleadoModel.GetLastEmpleadoId() + 1
+                Id = empleadoService.GetLastEmpleadoId() + 1
             };
 
-            empleadoModel.Create(emp);
+            empleadoService.Create(emp);
             PrintEmpleado();
         }
 
@@ -40,16 +34,16 @@ namespace ProductosApp.Formularios
                "Conda Jimenez", 337860.00M, DateTime.Now)
             {
                 HorasExtras = 23.5f,
-                Id = empleadoModel.GetLastEmpleadoId() + 1
+                Id = empleadoService.GetLastEmpleadoId() + 1
             };
 
-            empleadoModel.Create(emp);
+            empleadoService.Create(emp);
             PrintEmpleado();
         }
 
         private void PrintEmpleado()
         {
-            Empleado[] empleados = empleadoModel.GetEmpleados();
+            Empleado[] empleados = empleadoService.FindAll();
             if (empleados == null)
             {
                 richTextBox1.Text = "No hay elementos a mostrar.";
