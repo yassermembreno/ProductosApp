@@ -81,27 +81,30 @@ namespace Infraestructure.Productos
         public Producto[] GetProductosByUnidadMedida(UnidadMedida um)
         {
             Producto[] tmp = null;
-            if(productos == null)
+            if (productos == null)
             {
                 return tmp;
             }
-            foreach(Producto p in productos)
+
+            foreach (Producto p in productos)
             {
                 if(p.UnidadMedida == um)
                 {
                     Add(p, ref tmp);
                 }
             }
+
             return tmp;
         }
 
-        public Producto[] GetProductosByVencimiento(DateTime dt)
+        public Producto[] GetProductosByFechaVencimiento(DateTime dt)
         {
             Producto[] tmp = null;
-            if (productos == null)
+            if(productos == null)
             {
                 return tmp;
             }
+
             foreach(Producto p in productos)
             {
                 if(p.FechaVencimiento.CompareTo(dt) <= 0)
@@ -113,10 +116,10 @@ namespace Infraestructure.Productos
             return tmp;
         }
 
-        public Producto[] GetProductoByRangoPrecio(decimal start, decimal end)
+        public Producto[] GetProductosByRangoPrecio(decimal start, decimal end)
         {
             Producto[] tmp = null;
-            if (productos == null)
+            if(productos == null)
             {
                 return tmp;
             }
@@ -128,13 +131,8 @@ namespace Infraestructure.Productos
                     Add(p, ref tmp);
                 }
             }
-            return tmp;
-        }
 
-        public Producto[] GetProductosOrderByPrecio()
-        {
-            Array.Sort(productos, new Producto.ProductoPrecioComparer() );
-            return productos;
+            return tmp;
         }
 
         public string GetProductosAsJson()
@@ -142,11 +140,16 @@ namespace Infraestructure.Productos
             return JsonConvert.SerializeObject(productos);
         }
 
-        public int GetLastProductoId()
+        public Producto[] GetProductosOrderByPrecio()
         {
-            return productos == null ? 0 : productos[productos.Length -1].Id;
+            Array.Sort(productos, new Producto.ProductoOrderByPrecio());
+            return productos;
         }
 
+        public int GetLastProductoId()
+        {
+            return productos == null ? 0 : productos[productos.Length - 1].Id;
+        }
         #endregion
 
         #region Private Method

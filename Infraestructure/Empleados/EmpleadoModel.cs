@@ -1,11 +1,12 @@
 ﻿using Domain.Entities.Empleados;
+using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Infraestructure.Empleados
 {
-    public class EmpleadoModel
+    public class EmpleadoModel : IEmpleadoModel
     {
         private Empleado[] empleados;
 
@@ -19,7 +20,7 @@ namespace Infraestructure.Empleados
             }
 
             Empleado[] temp = new Empleado[empleados.Length + 1];
-            Array.Copy(empleados,temp,empleados.Length);
+            Array.Copy(empleados, temp, empleados.Length);
             temp[temp.Length - 1] = e;
 
             empleados = temp;
@@ -29,8 +30,23 @@ namespace Infraestructure.Empleados
         {
             return empleados == null ? 0 : empleados[empleados.Length - 1].Id;
         }
+      
+        public Empleado FindById(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Empleado[] GetEmpleados()
+        public int Update(Empleado t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(Empleado t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Empleado[] FindAll()
         {
             return empleados;
         }
