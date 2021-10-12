@@ -6,19 +6,25 @@ namespace Domain.Entities.Empleados
 {
     public abstract class Empleado
     {
-        protected int CodigoEmpleado {get;set;}
-        protected string Nombres { get; set; }
-        protected string Apellidos { get; set; }
-        protected string Cedula { get; set; }
-        protected decimal Salario { get; set; }
+        public int Id { get; set; }
+        public int Codigo { get; set; }
+        public string Cedula { get; set; }
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
+        public decimal Salario { get; set; }
+        public DateTime FechaContratacion { get; set; }
 
-        protected Empleado(int codigo, string nombres, string apellidos)
+        protected Empleado(int codigo, string cedula, string nombres, string apellidos, decimal salario, DateTime fechaContratacion)
         {
-            CodigoEmpleado = codigo;
+            Codigo = codigo;
+            Cedula = cedula;
             Nombres = nombres;
             Apellidos = apellidos;
+            Salario = salario;
+            FechaContratacion = fechaContratacion;
         }
 
-        public abstract string GetEmpleadoAsString();    
+        public abstract string GetEmpleadoAsString();
+
     }
 }

@@ -11,7 +11,6 @@ namespace Domain.Enums
         MiliLitros,
         Kilogramos,
         Gramos,
-        Libras,
-        Onzas
+        Libras
     }
 }

@@ -9,17 +9,18 @@ namespace Domain.Entities.Empleados
     {
         public CategoriaDocente CategoriaDocente { get; set; }
 
-        public Docente(int codigo, string nombres, string apellidos, string cedula, decimal salario) : 
-            base(codigo, nombres, apellidos)
+        public Docente(int codigo, string cedula, 
+            string nombres, string apellidos, decimal salario, 
+            DateTime fechaContratacion) : 
+            base(codigo, cedula, nombres, apellidos,salario, fechaContratacion)
         {
-            Cedula = cedula;
-            Salario = salario;
+
         }
         public override string GetEmpleadoAsString()
         {
-            return string.Format("{0,-10} {1,-20} {2,-20} {3,-16} {4,10:f} {5,-20} \n",
-                $"{CodigoEmpleado}", $"{Nombres}", $"{Apellidos}", 
-                $"{Cedula}", $"{Salario}", $"{CategoriaDocente}");
+            return string.Format("{0,5:d} {1,20} {2,20} {3,20} {4,7:f} {5,20:d} {6,20} \n",
+                $"{Codigo}", $"{Cedula}", $"{Nombres}", $"{Apellidos}", 
+                $"{Salario}", $"{FechaContratacion}",$"{CategoriaDocente}");
         }
     }
 }
