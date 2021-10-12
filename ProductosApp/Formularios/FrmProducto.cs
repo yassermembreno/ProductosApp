@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using AppCore.Interfaces;
+using Domain.Entities;
 using Domain.Enums;
 using Infraestructure.Productos;
 using System;
@@ -15,7 +16,7 @@ namespace ProductosApp.Formularios
 {    
     public partial class FrmProducto : Form
     {
-        public ProductoModel PModel { get; set; }
+        public IProductoService PModel { get; set; }
         public FrmProducto()
         {
             InitializeComponent();
@@ -42,7 +43,7 @@ namespace ProductosApp.Formularios
                 UnidadMedida = (UnidadMedida)cmbMeasureUnit.SelectedIndex
             };
 
-            PModel.Add(p);
+            PModel.Create(p);
 
             Dispose();
         }
