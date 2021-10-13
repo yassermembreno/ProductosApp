@@ -1,5 +1,7 @@
-﻿using AppCore.Interfaces;
+﻿using AppCore.Factories;
+using AppCore.Interfaces;
 using AppCore.Processses;
+using AppCore.Processses.Payroll;
 using Domain.Entities.Empleados;
 using Infraestructure.Empleados;
 using System;
@@ -9,12 +11,10 @@ namespace ProductosApp.Formularios
 {
     public partial class FrmGestionEmpleados : Form
     {
-        private IEmpleadoService empleadoService; // Inversion of Control
-        private SalaryCalculator salaryCalculator;
+        private IEmpleadoService empleadoService; // Inversion of Control        
         public FrmGestionEmpleados(IEmpleadoService empleadoService)
         {
-            this.empleadoService = empleadoService;
-            salaryCalculator = new SalaryCalculator();
+            this.empleadoService = empleadoService;            
             InitializeComponent();
         }
 
@@ -56,7 +56,8 @@ namespace ProductosApp.Formularios
             foreach(Empleado e in empleados)
             {
                 richTextBox1.AppendText(e.GetEmpleadoAsString());
-                richTextBox1.AppendText($"Salario neto: {salaryCalculator.CalculateSalary(e)} \n");
+                
+                richTextBox1.AppendText($"Salario neto: {SalaryCalculatorFactory.CreateInstance(e).CalculateSalary(e)} \n");
             }
         }
     }
