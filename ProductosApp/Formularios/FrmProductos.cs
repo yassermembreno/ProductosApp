@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿using AppCore.Interfaces;
+using Domain.Enums;
 using Infraestructure.Productos;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,10 @@ namespace ProductosApp.Formularios
 {
     public partial class FrmProductos : Form
     {
-        private ProductoModel productoModel;
-        public FrmProductos()
+        private IProductoService service;
+        public FrmProductos(IProductoService service)
         {
-            productoModel = new ProductoModel();
+            this.service = service;
             InitializeComponent();
         }
 
@@ -33,10 +34,10 @@ namespace ProductosApp.Formularios
         private void BtnNew_Click(object sender, EventArgs e)
         {
             FrmProducto frmProducto = new FrmProducto();
-            frmProducto.PModel = productoModel;
+            frmProducto.PModel = service;
             frmProducto.ShowDialog();
 
-            rtbProductView.Text = productoModel.GetProductosAsJson();
+            rtbProductView.Text = service.GetProductosAsJson();
         }
 
         private void CmbFinderType_SelectedIndexChanged(object sender, EventArgs e)
