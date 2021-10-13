@@ -32,7 +32,7 @@ namespace ProductosApp
             var container = builder.Build();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmProductos(container.Resolve<IProductoService>()));
+            Application.Run(new FrmGestionEmpleados(container.Resolve<IEmpleadoService>()));
         }
     }
 }
