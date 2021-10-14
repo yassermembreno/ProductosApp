@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Entities.Inventories;
 using Domain.Enums;
 using Newtonsoft.Json;
 using System;
@@ -78,7 +78,7 @@ namespace Infraestructure.Productos
             return index <= 0 ? null : productos[index];
         }
 
-        public Producto[] GetProductosByUnidadMedida(UnidadMedida um)
+        public Producto[] GetProductosByUnidadMedida(MeasureUnit um)
         {
             Producto[] tmp = null;
             if (productos == null)
@@ -97,54 +97,54 @@ namespace Infraestructure.Productos
             return tmp;
         }
 
-        public Producto[] GetProductosByFechaVencimiento(DateTime dt)
-        {
-            Producto[] tmp = null;
-            if(productos == null)
-            {
-                return tmp;
-            }
+        //public Producto[] GetProductosByFechaVencimiento(DateTime dt)
+        //{
+        //    Producto[] tmp = null;
+        //    if(productos == null)
+        //    {
+        //        return tmp;
+        //    }
 
-            foreach(Producto p in productos)
-            {
-                if(p.FechaVencimiento.CompareTo(dt) <= 0)
-                {
-                    Add(p, ref tmp);
-                }
-            }
+        //    foreach(Producto p in productos)
+        //    {
+        //        if(p.FechaVencimiento.CompareTo(dt) <= 0)
+        //        {
+        //            Add(p, ref tmp);
+        //        }
+        //    }
 
-            return tmp;
-        }
+        //    return tmp;
+        //}
 
-        public Producto[] GetProductosByRangoPrecio(decimal start, decimal end)
-        {
-            Producto[] tmp = null;
-            if(productos == null)
-            {
-                return tmp;
-            }
+        //public Producto[] GetProductosByRangoPrecio(decimal start, decimal end)
+        //{
+        //    Producto[] tmp = null;
+        //    if(productos == null)
+        //    {
+        //        return tmp;
+        //    }
 
-            foreach(Producto p in productos)
-            {
-                if(p.Precio >= start && p.Precio <= end)
-                {
-                    Add(p, ref tmp);
-                }
-            }
+        //    foreach(Producto p in productos)
+        //    {
+        //        if(p.Precio >= start && p.Precio <= end)
+        //        {
+        //            Add(p, ref tmp);
+        //        }
+        //    }
 
-            return tmp;
-        }
+        //    return tmp;
+        //}
 
         public string GetProductosAsJson()
         {
             return JsonConvert.SerializeObject(productos);
         }
 
-        public Producto[] GetProductosOrderByPrecio()
-        {
-            Array.Sort(productos, new Producto.ProductoOrderByPrecio());
-            return productos;
-        }
+        //public Producto[] GetProductosOrderByPrecio()
+        //{
+        //    Array.Sort(productos, new Producto.ProductoOrderByPrecio());
+        //    return productos;
+        //}
 
         public int GetLastProductoId()
         {

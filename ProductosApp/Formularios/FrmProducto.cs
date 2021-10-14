@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Entities.Inventories;
 using Domain.Enums;
 using Infraestructure.Productos;
 using System;
@@ -23,7 +23,7 @@ namespace ProductosApp.Formularios
 
         private void FrmProducto_Load(object sender, EventArgs e)
         {
-            cmbMeasureUnit.Items.AddRange(Enum.GetValues(typeof(UnidadMedida))
+            cmbMeasureUnit.Items.AddRange(Enum.GetValues(typeof(MeasureUnit))
                                               .Cast<object>()
                                               .ToArray()
                                           );
@@ -36,10 +36,10 @@ namespace ProductosApp.Formularios
                 Id = PModel.GetLastProductoId() + 1,
                 Nombre = txtNombre.Text,
                 Descripcion = txtDesc.Text,
-                Existencia = (int)nudExist.Value,
-                Precio = nudPrice.Value,
-                FechaVencimiento = dtpCaducity.Value,
-                UnidadMedida = (UnidadMedida)cmbMeasureUnit.SelectedIndex
+                //Existencia = (int)nudExist.Value,
+                //Precio = nudPrice.Value,
+                //FechaVencimiento = dtpCaducity.Value,
+                UnidadMedida = (MeasureUnit)cmbMeasureUnit.SelectedIndex
             };
 
             PModel.Add(p);

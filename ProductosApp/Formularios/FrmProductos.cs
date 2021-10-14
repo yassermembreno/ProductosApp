@@ -23,7 +23,7 @@ namespace ProductosApp.Formularios
 
         private void FrmProductos_Load(object sender, EventArgs e)
         {
-            cmbMeasureUnit.Items.AddRange(Enum.GetValues(typeof(UnidadMedida))
+            cmbMeasureUnit.Items.AddRange(Enum.GetValues(typeof(MeasureUnit))
                                               .Cast<object>()
                                               .ToArray()
                                           );

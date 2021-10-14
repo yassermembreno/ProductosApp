@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain.Enums
 {
-    public enum UnidadMedida
+    public enum MeasureUnit
     {
         Unidades,
         Litros,
