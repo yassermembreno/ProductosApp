@@ -12,6 +12,7 @@ namespace Domain.Entities.Inventories
         public Order Order { get; set; }
         public string SKU { get; set; }
         public decimal Price { get; set; }
+        public decimal Cost { get; set; }
         public decimal Discount { get; set; }
         public int Quantity { get; set; }
 

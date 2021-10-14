@@ -14,6 +14,7 @@ namespace Domain.Entities.Inventories
         public decimal MaximumRetailPrice { get; set; }
         public decimal Discount { get; set; }
         public decimal Price { get; set; }
+        public decimal Cost { get; set; }
         public int Quantity { get; set; }
         public int Sold { get; set; }
         public int Available { get; set; }

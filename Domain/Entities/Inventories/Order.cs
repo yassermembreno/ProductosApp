@@ -10,6 +10,7 @@ namespace Domain.Entities.Inventories
         public int Id { get; set; }
         public OrderType Type { get; set; }
         public OrderStatus Status { get; set; }
+        public DateTime Date { get; set; }
         public decimal Subtotal { get; set; }
         public decimal Discount { get; set; }
         public decimal Tax => Subtotal * 0.15M;// TODO Settings
