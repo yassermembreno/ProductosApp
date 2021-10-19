@@ -90,5 +90,10 @@ namespace Infraestructure.Empleados
         {
             return empleados;
         }
+
+        public int GetLastId()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

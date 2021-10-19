@@ -7,6 +7,6 @@ namespace Domain.Enums.Inventories
     public enum OrderType
     {
         Purchase,
-        Sale
+        Sales
     }
 }

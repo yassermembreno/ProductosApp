@@ -10,5 +10,7 @@ namespace AppCore.Interfaces
         int Update(T t);
         bool Delete(T t);
         T[] FindAll();
+        int GetLastId();
+
     }
 }

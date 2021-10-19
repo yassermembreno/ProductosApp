@@ -13,12 +13,10 @@ namespace Infraestructure.Inventories
         {
             throw new NotImplementedException();
         }
-
         public Order[] FindByStatus(OrderStatus status)
         {
             throw new NotImplementedException();
         }
-
         public Order[] FindByType(OrderType orderType)
         {
             throw new NotImplementedException();

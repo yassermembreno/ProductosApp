@@ -32,9 +32,9 @@ namespace AppCore.Services
             return productoRepository.FindAll();
         }
 
-        public int GetLastProductoId()
+        public int GetLastId()
         {
-            return productoRepository.GetLastProductoId();
+            return productoRepository.GetLastId();
         }
 
         public Producto GetProductoById(int id)

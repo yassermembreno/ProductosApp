@@ -33,7 +33,6 @@ namespace Infraestructure.Inventories
 
             return item;
         }
-
         public Item[] FindByProductId(int productId)
         {
             Item[] items = FindAll(), data = null;                        

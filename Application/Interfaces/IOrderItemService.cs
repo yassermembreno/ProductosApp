@@ -8,8 +8,8 @@ namespace AppCore.Interfaces
 {
     public interface IOrderItemService : IService<OrderItem>
     {
-        Order FindById(int orderId);
-        Order[] FindByType(OrderType orderType);
-        Order[] FindByStatus(OrderStatus status);
+        OrderItem[] FindByProductId(int productId);
+        OrderItem[] FindByOrderId(int OrderId);
+        OrderItem[] FindByItemId(int itemId);
     }
 }

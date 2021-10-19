@@ -14,7 +14,7 @@ namespace AppCore.Processes
             decimal finalInventory = 0.0M;
             foreach(Item item in items)
             {
-                finalInventory += item.Cost * item.Quantity;
+                finalInventory += item.Cost * item.Available;
             }
 
             return finalInventory;

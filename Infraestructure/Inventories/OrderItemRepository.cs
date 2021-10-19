@@ -13,9 +13,19 @@ namespace Infraestructure.Inventories
             throw new NotImplementedException();
         }
 
-        public OrderItem[] FindByOrderId(int OrderId)
+        public OrderItem[] FindByOrderId(int orderId)
         {
-            throw new NotImplementedException();
+            OrderItem[] orderItems = null;
+
+            foreach(OrderItem orderItem in data)
+            {
+                if(orderItem.Order.Id == orderId)
+                {
+                    Add(orderItem, ref orderItems);
+                }
+            }
+
+            return orderItems;
         }
 
         public OrderItem[] FindByProductId(int productId)

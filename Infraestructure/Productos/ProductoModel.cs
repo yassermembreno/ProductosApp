@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Infraestructure.Productos
 {
+    [Obsolete("Esta clase ya no debe utilizarse, mejor utilizar ProductRepository")]
     public class ProductoModel
     {
         private Producto[] productos;

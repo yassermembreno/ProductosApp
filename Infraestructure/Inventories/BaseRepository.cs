@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace Infraestructure.Inventories
@@ -77,7 +78,13 @@ namespace Infraestructure.Inventories
         protected int GetIndex(T t)
         {
             int index = int.MinValue, i = 0;
-            int id = (int)t.GetType().GetProperty("Id").GetValue(t);
+            int? id = (int)t.GetType().GetProperty("Id")?.GetValue(t);
+
+            if(id == null)
+            {
+                throw new ArgumentException($"El objeto {t.GetType().Name} no contiene la propiedad Id");
+            }
+
             foreach(T e in data)
             {
                 int key = (int)t.GetType().GetProperty("Id").GetValue(e);
@@ -106,5 +113,11 @@ namespace Infraestructure.Inventories
             tmp[tmp.Length - 1] = t;
             data = tmp;
         }
+
+        public int GetLastId()
+        {   
+            return data == null ? 0 : (int)data[data.Length - 1].GetType().GetProperty("Id").GetValue(data[data.Length - 1]);
+        }
+
     }
 }

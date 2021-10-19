@@ -31,19 +31,24 @@ namespace AppCore.Services
             return orderItemRepository.FindAll();
         }
 
-        public Order FindById(int orderId)
+        public OrderItem[] FindByItemId(int itemId)
         {
             throw new NotImplementedException();
         }
 
-        public Order[] FindByStatus(OrderStatus status)
+        public OrderItem[] FindByOrderId(int orderId)
+        {
+            return orderItemRepository.FindByOrderId(orderId);
+        }
+
+        public OrderItem[] FindByProductId(int productId)
         {
             throw new NotImplementedException();
         }
 
-        public Order[] FindByType(OrderType orderType)
+        public int GetLastId()
         {
-            throw new NotImplementedException();
+            return orderItemRepository.GetLastId();
         }
 
         public int Update(OrderItem t)

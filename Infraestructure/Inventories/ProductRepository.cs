@@ -34,7 +34,6 @@ namespace Infraestructure.Inventories
 
             return product;            
         }
-
         public Producto[] GetProductosByUnidadMedida(MeasureUnit um)
         {
             Producto[] tmp = null;
@@ -57,9 +56,6 @@ namespace Infraestructure.Inventories
         {
             return JsonConvert.SerializeObject(data);
         }
-        public int GetLastProductoId()
-        {
-            return data == null ? 0 : data[data.Length - 1].Id;
-        }
+        
     }
 }

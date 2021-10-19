@@ -47,6 +47,11 @@ namespace AppCore.Services
             throw new NotImplementedException();
         }
 
+        public int GetLastId()
+        {
+            return orderRepository.GetLastId();
+        }
+
         public int Update(Order t)
         {
             throw new NotImplementedException();

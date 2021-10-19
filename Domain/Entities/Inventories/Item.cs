@@ -17,7 +17,7 @@ namespace Domain.Entities.Inventories
         public decimal Cost { get; set; }
         public int Quantity { get; set; }
         public int Sold { get; set; }
-        public int Available { get; set; }
+        public int Available => Quantity - Sold - Defective;
         public int Defective { get; set; }
         public DateTime ExpirationDate { get; set; }    
     }

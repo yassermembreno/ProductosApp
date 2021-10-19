@@ -41,6 +41,11 @@ namespace AppCore.Services
             throw new NotImplementedException();
         }
 
+        public int GetLastId()
+        {
+            return itemRepository.GetLastId();
+        }
+
         public int Update(Item t)
         {
             throw new NotImplementedException();
