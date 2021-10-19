@@ -7,7 +7,7 @@ namespace Infraestructure.Inventories
 {
     public abstract class BaseRepository<T> : IModel<T>
     {
-        private T[] data;
+        protected T[] data;
 
         public void Create(T t)
         {

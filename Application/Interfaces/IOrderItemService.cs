@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Interfaces
+namespace AppCore.Interfaces
 {
-    public interface IOrderRepository : IModel<Order>
+    public interface IOrderItemService : IService<OrderItem>
     {
         Order FindById(int orderId);
         Order[] FindByType(OrderType orderType);

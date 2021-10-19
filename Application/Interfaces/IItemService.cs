@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Interfaces
+namespace AppCore.Interfaces
 {
-    public interface IItemRepository : IModel<Item>
+    public interface IItemService : IService<Item>
     {
-        Item FindById(int id);        
+        Item FindById(int id);
         Item[] FindByProductId(int productId);
     }
 }

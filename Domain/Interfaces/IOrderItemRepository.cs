@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Domain.Interfaces
 {
-    public interface IOrderItemRepository
+    public interface IOrderItemRepository : IModel<OrderItem>
     {
         OrderItem[] FindByProductId(int productId);
         OrderItem[] FindByOrderId(int OrderId);

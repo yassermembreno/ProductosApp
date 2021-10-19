@@ -7,7 +7,7 @@ namespace AppCore.Interfaces
 {
     public interface IInventoryCalculator
     {
-        decimal CalculateSalesCost(OrderItem[] saleOrderItems, OrderItem[] purchaseOrderItem);
+        decimal CalculateSalesCost(OrderItem[] saleOrderItems);
         decimal CalculateFinalInventory(Item[] items);
     }
 }
