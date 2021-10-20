@@ -20,6 +20,7 @@ namespace ProductosApp.Formularios.Inventories
         private IOrderItemService orderItemService;
         private IItemService itemService;
         private IInventoryCalculator peps;
+        private Form activeForm;
         public FrmInventoryManagement()
         {
             InitializeComponent();
@@ -40,13 +41,13 @@ namespace ProductosApp.Formularios.Inventories
             PopulateProduct();
             PopulateItems();
             PopulateOrder();
-            foreach(Item item in itemService.FindAll())
-            {
-                richTextBox1.AppendText($"item: {item.Id} -  {item.Producto.Nombre} - {item.Producto.Descripcion}\n");                
-            }
+            //foreach(Item item in itemService.FindAll())
+            //{
+            //    richTextBox1.AppendText($"item: {item.Id} -  {item.Producto.Nombre} - {item.Producto.Descripcion}\n");                
+            //}
 
-            richTextBox1.AppendText($"Final Inventory: {peps.CalculateFinalInventory(itemService.FindAll())}\n");
-            richTextBox1.AppendText($"Sales Cost: {peps.CalculateSalesCost(orderItemService.FindAll())}\n");
+            //richTextBox1.AppendText($"Final Inventory: {peps.CalculateFinalInventory(itemService.FindAll())}\n");
+            //richTextBox1.AppendText($"Sales Cost: {peps.CalculateSalesCost(orderItemService.FindAll())}\n");
 
             PrintPEPS();
 
@@ -84,7 +85,7 @@ namespace ProductosApp.Formularios.Inventories
                 Id = itemService.GetLastId() + 1,
                 SKU = "1-CC",
                 Brand = "Coca-Cola",
-                Available = 10,
+                //Available = 10,
                 Cost = 39.50M,
                 Price = 45.00M,
                 Quantity = 30,
@@ -103,7 +104,7 @@ namespace ProductosApp.Formularios.Inventories
                 Id = itemService.GetLastId() + 1,
                 SKU = "1-FN",
                 Brand = "Coca-Cola",
-                Available = 15,
+                //Available = 15,
                 Cost = 41.50M,
                 Price = 47.00M,
                 Quantity = 20,
@@ -182,12 +183,27 @@ namespace ProductosApp.Formularios.Inventories
 
             Array.Sort(orderItems, new OrderItemSortByOrderDate());
 
-            richTextBox1.AppendText($"Fecha \t\tDescripcion \t\tUnidades Costo Inventario Final Costo Venta\n");
-            foreach(OrderItem orderItem in orderItems)
-            {
-                richTextBox1.AppendText($"{orderItem.Order.Date} \t\t{orderItem.Order.Type} \t\t{orderItem.Quantity} {orderItem.Cost} {(orderItem.Quantity * orderItem.Cost)}\n");
-            }
+            //richTextBox1.AppendText($"Fecha \t\tDescripcion \t\tUnidades Costo Inventario Final Costo Venta\n");
+            //foreach(OrderItem orderItem in orderItems)
+            //{
+            //    richTextBox1.AppendText($"{orderItem.Order.Date} \t\t{orderItem.Order.Type} \t\t{orderItem.Quantity} {orderItem.Cost} {(orderItem.Quantity * orderItem.Cost)}\n");
+            //}
         }
 
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            FrmOrderView frmOrderView = new FrmOrderView();
+            ShowActiveForm(frmOrderView);
+        }
+
+        private void ShowActiveForm(Form form)
+        {
+            activeForm = form;
+            form.TopLevel = false;
+            form.Dock = DockStyle.Fill;
+            form.FormBorderStyle = FormBorderStyle.None;
+            pnlContent.Controls.Add(form);
+            activeForm.Show();
+        }
     }
 }

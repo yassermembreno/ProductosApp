@@ -11,5 +11,6 @@ namespace AppCore.Interfaces
         Order FindById(int orderId);
         Order[] FindByType(OrderType orderType);
         Order[] FindByStatus(OrderStatus status);
+        void Create(Order order, OrderItem[] items);
     }
 }

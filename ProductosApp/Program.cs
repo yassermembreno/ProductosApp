@@ -5,6 +5,7 @@ using Autofac;
 using Domain.Interfaces;
 using Infraestructure.Empleados;
 using Infraestructure.Inventories;
+using ProductosApp.Demos;
 using ProductosApp.Formularios;
 using ProductosApp.Formularios.Inventories;
 using System;
@@ -40,9 +41,11 @@ namespace ProductosApp
 
             App.EnableVisualStyles();
             App.SetCompatibleTextRenderingDefault(false);
-            App.Run(new FrmInventoryManagement(container.Resolve<IProductService>(), container.Resolve<IOrderService>(), 
+            App.Run(new FrmInventoryManagement(container.Resolve<IProductService>(), container.Resolve<IOrderService>(),
                                                container.Resolve<IOrderItemService>(), container.Resolve<IItemService>(),
                                                 container.Resolve<IInventoryCalculator>()));
+
+            //App.Run(new FrmDemos());
         }
     }
 }

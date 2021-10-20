@@ -11,15 +11,36 @@ namespace AppCore.Services
     public class OrderService : IOrderService
     {
         private IOrderRepository orderRepository;
+        private IOrderItemRepository orderItemRepository;
+        private IItemRepository itemRepository;
 
-        public OrderService(IOrderRepository orderRepository)
+        public OrderService(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IItemRepository itemRepository)
         {
             this.orderRepository = orderRepository;
+            this.orderItemRepository = orderItemRepository;
+            this.itemRepository = itemRepository;
         }
 
         public void Create(Order t)
         {
             orderRepository.Create(t);
+        }
+
+        public void Create(Order order, OrderItem[] items)
+        {
+            
+            orderRepository.Create(order);
+
+            foreach(OrderItem orderItem in items)
+            {
+                Item item = orderItem.Item;
+
+                item.Quantity = orderItem.Quantity;
+                item.Cost = orderItem.Cost;
+
+                itemRepository.Update(item);
+                orderItemRepository.Create(orderItem);
+            }
         }
 
         public bool Delete(Order t)
