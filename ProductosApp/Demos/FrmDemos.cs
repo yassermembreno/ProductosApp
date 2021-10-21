@@ -54,12 +54,12 @@ namespace ProductosApp.Demos
 
         private void Print<T>(T obj)
         {
-            PropertyInfo[] properties =  obj.GetType().GetProperties();
-            
+            PropertyInfo[] properties =  obj.GetType().GetProperties();            
             StringBuilder builder = new StringBuilder();
+            
             foreach(PropertyInfo info in properties)
             {
-                builder.Append($"{info.Name} : {info.GetValue(obj)}\n");
+                builder.Append($"{info.Name} : {info.GetValue(obj)}\n");                
             }
 
             MessageBox.Show(builder.ToString());

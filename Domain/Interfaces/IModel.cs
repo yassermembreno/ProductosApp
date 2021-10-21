@@ -11,5 +11,6 @@ namespace Domain.Interfaces
         bool Delete(T t);
         T[] FindAll();
         int GetLastId();
+        void Add(T t, ref T[] data);
     }
 }

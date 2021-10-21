@@ -8,22 +8,17 @@ using System.Text;
 
 namespace AppCore.Services
 {
-    public class OrderService : IOrderService
+    public class OrderService : BaseService<Order>, IOrderService
     {
         private IOrderRepository orderRepository;
         private IOrderItemRepository orderItemRepository;
         private IItemRepository itemRepository;
 
-        public OrderService(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IItemRepository itemRepository)
+        public OrderService(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IItemRepository itemRepository) : base(orderRepository)
         {
             this.orderRepository = orderRepository;
             this.orderItemRepository = orderItemRepository;
             this.itemRepository = itemRepository;
-        }
-
-        public void Create(Order t)
-        {
-            orderRepository.Create(t);
         }
 
         public void Create(Order order, OrderItem[] items)
@@ -41,17 +36,7 @@ namespace AppCore.Services
                 itemRepository.Update(item);
                 orderItemRepository.Create(orderItem);
             }
-        }
-
-        public bool Delete(Order t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Order[] FindAll()
-        {
-            return orderRepository.FindAll();
-        }
+        }       
 
         public Order FindById(int orderId)
         {
@@ -68,14 +53,6 @@ namespace AppCore.Services
             throw new NotImplementedException();
         }
 
-        public int GetLastId()
-        {
-            return orderRepository.GetLastId();
-        }
-
-        public int Update(Order t)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

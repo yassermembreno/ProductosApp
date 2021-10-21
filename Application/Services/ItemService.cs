@@ -7,30 +7,15 @@ using System.Text;
 
 namespace AppCore.Services
 {
-    public class ItemService : IItemService
+    public class ItemService : BaseService<Item>, IItemService
     {
         private IItemRepository itemRepository;
 
-        public ItemService(IItemRepository itemRepository)
+        public ItemService(IItemRepository itemRepository) : base(itemRepository)
         {
             this.itemRepository = itemRepository;
         }
-
-        public void Create(Item t)
-        {
-            itemRepository.Create(t);
-        }
-
-        public bool Delete(Item t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Item[] FindAll()
-        {
-            return itemRepository.FindAll();
-        }
-
+       
         public Item FindById(int id)
         {
             throw new NotImplementedException();
@@ -38,17 +23,8 @@ namespace AppCore.Services
 
         public Item[] FindByProductId(int productId)
         {
-            throw new NotImplementedException();
+            return itemRepository.FindByProductId(productId);
         }
 
-        public int GetLastId()
-        {
-            return itemRepository.GetLastId();
-        }
-
-        public int Update(Item t)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

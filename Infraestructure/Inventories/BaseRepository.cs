@@ -99,7 +99,7 @@ namespace Infraestructure.Inventories
             return index;
         }
 
-        protected void Add(T t, ref T[] data)
+        public void Add(T t, ref T[] data)
         {
             if (data == null)
             {

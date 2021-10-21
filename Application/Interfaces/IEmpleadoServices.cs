@@ -8,7 +8,6 @@ namespace AppCore.Interfaces
         int Update(Empleado e);
         bool Delete(Empleado e);
         Empleado FindById(int id);
-        Empleado[] FindAll();
-        int GetLastEmpleadoId();
+        Empleado[] FindAll();        
     }
 }

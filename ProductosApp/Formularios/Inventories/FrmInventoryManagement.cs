@@ -161,6 +161,8 @@ namespace ProductosApp.Formularios.Inventories
                 Subtotal = 1000M
             };
 
+            orderService.Create(salesOrder);
+
             foreach (Item item in itemService.FindAll())
             {
                 OrderItem orderItem = new OrderItem(item.Producto, item, salesOrder)
@@ -193,6 +195,10 @@ namespace ProductosApp.Formularios.Inventories
         private void btnOrder_Click(object sender, EventArgs e)
         {
             FrmOrderView frmOrderView = new FrmOrderView();
+            frmOrderView.OrderService = orderService;
+            frmOrderView.ItemService = itemService;
+            frmOrderView.productService = productService;
+            frmOrderView.OrderItemService = orderItemService;
             ShowActiveForm(frmOrderView);
         }
 

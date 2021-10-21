@@ -95,5 +95,10 @@ namespace Infraestructure.Empleados
         {
             throw new NotImplementedException();
         }
+
+        public void Add(Empleado t, ref Empleado[] data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

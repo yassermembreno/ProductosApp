@@ -9,33 +9,14 @@ using System.Text;
 
 namespace AppCore.Services
 {
-    public class ProductService : IProductService
+    public class ProductService : BaseService<Producto>, IProductService
     {
         private IProductRepository productoRepository;
 
-        public ProductService(IProductRepository productoRepository)
+        public ProductService(IProductRepository productoRepository) : base(productoRepository)
         {
             this.productoRepository = productoRepository;
-        }
-        public void Create(Producto t)
-        {
-            productoRepository.Create(t);
-        }
-
-        public bool Delete(Producto t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Producto[] FindAll()
-        {
-            return productoRepository.FindAll();
-        }
-
-        public int GetLastId()
-        {
-            return productoRepository.GetLastId();
-        }
+        }       
 
         public Producto GetProductoById(int id)
         {
@@ -52,9 +33,5 @@ namespace AppCore.Services
             throw new NotImplementedException();
         }
 
-        public int Update(Producto t)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
