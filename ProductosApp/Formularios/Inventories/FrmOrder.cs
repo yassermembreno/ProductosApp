@@ -110,7 +110,15 @@ namespace ProductosApp.Formularios.Inventories
             decimal discount = 0;
             decimal total;
             int available = 0;
-            if(e.ColumnIndex == 1)
+            selectedOrderTypeIndex = cmbOrderType.SelectedIndex;
+
+            if (selectedOrderTypeIndex < 0)
+            {
+                dgvOrderItem.Rows[e.RowIndex].Cells[1].Value = 0;
+                return;
+            }
+
+            if(e.ColumnIndex == 1 && selectedOrderTypeIndex == 1)
             {
                 Item[] items = ItemService.FindByProductId(orderItems[e.RowIndex].Producto.Id);
                 if(items == null)
