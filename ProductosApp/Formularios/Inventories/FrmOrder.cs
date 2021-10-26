@@ -33,7 +33,7 @@ namespace ProductosApp.Formularios.Inventories
         {
             cmbOrderType.Items.AddRange(Enum.GetValues(typeof(OrderType)).Cast<object>().ToArray());            
             dgvOrderItem.Rows.Clear();
-            //dgvProducts.DataSource = productService.FindAll();
+            dgvProducts.DataSource = productService.FindAll();
         }        
 
         private void ShowMessageError(string message)
@@ -56,7 +56,7 @@ namespace ProductosApp.Formularios.Inventories
                 return;
             }
 
-            Item item = ItemService.FindByProductId(p.Id).Last();
+            Item item = ItemService.FindByProductId(p.Id)?.Last();
             if (item == null)
             {
                 ShowMessageError($"Error, no se pudo obtener el Item del Producto: {p.Nombre}.");
@@ -73,7 +73,8 @@ namespace ProductosApp.Formularios.Inventories
                 SKU = item.SKU
             };
 
-            OrderItem temp = orderItems?.Where(o => o.Producto.Id == orderItem.Producto.Id)?.FirstOrDefault();
+            OrderItem temp = orderItems?.Where(o => o.Producto.Id == orderItem.Producto.Id)?
+                                        .FirstOrDefault();
             if(temp != null)
             {
                 ShowMessageError($"Error, el producto con Id {p.Id} ya ha sido agregado.");
@@ -94,7 +95,7 @@ namespace ProductosApp.Formularios.Inventories
 
         private decimal CalculateSubtotal(int q, decimal price)
         {
-            return Math.Round(q * price);
+            return Math.Round(q * price,2);
         }
 
         private void dgvOrderItem_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -108,7 +109,26 @@ namespace ProductosApp.Formularios.Inventories
             decimal iva;
             decimal discount = 0;
             decimal total;
+            int available = 0;
+            if(e.ColumnIndex == 1)
+            {
+                Item[] items = ItemService.FindByProductId(orderItems[e.RowIndex].Producto.Id);
+                if(items == null)
+                {
+                    ShowMessageError($"Error, ese producto no esta disponible.");
+                    return;
+                }
+                available = items.Select(i => i.Available).Sum();
+                int q = int.Parse(dgvOrderItem.Rows[e.RowIndex].Cells[1].Value.ToString());
 
+                if(q > available)
+                {
+                    ShowMessageError($"Error, la cantidad {q} sobrepasa lo disponible {available}.");
+                    dgvOrderItem.Rows[e.RowIndex].Cells[1].Value = available;
+                    return;
+                }
+            }
+            
             dgvOrderItem.Rows[e.RowIndex].Cells[3].Value = Decimal.Round(CalculateSubtotal(int.Parse(dgvOrderItem.Rows[e.RowIndex].Cells[1].Value.ToString()),
                                                                                        decimal.Parse(dgvOrderItem.Rows[e.RowIndex].Cells[2].Value.ToString())), 2);
             foreach(DataGridViewRow row in dgvOrderItem.Rows)
@@ -120,9 +140,9 @@ namespace ProductosApp.Formularios.Inventories
                 subtotal += decimal.Parse(row.Cells[3].Value.ToString());
             }
 
-            iva = subtotal * 0.15M;
-            total = subtotal + iva;
+            iva = subtotal * 0.15M;            
             discount = subtotal * 0.10M;
+            total = subtotal + iva - discount;
 
             txtSubtotal.Text = subtotal.ToString();
             txtIva.Text = iva.ToString();

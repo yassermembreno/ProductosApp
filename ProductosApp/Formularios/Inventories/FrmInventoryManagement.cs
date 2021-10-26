@@ -85,8 +85,20 @@ namespace ProductosApp.Formularios.Inventories
                 InventoryMethod = Domain.Enums.Inventories.InventoryMethod.PEPS,
                 UnidadMedida = Domain.Enums.MeasureUnit.Unidades
             };
-
+            
             productService.Create(p2);
+
+            Producto p3 = new Producto()
+            {
+                Id = productService.GetLastId() + 1,
+                Nombre = "Leche",
+                Descripcion = "Lala 1 litro",
+                InventoryMethod = Domain.Enums.Inventories.InventoryMethod.PEPS,
+                UnidadMedida = Domain.Enums.MeasureUnit.Litros
+            };
+
+            productService.Create(p3);
+
         }
 
         private void PopulateItems()
