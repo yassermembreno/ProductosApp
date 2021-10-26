@@ -29,7 +29,7 @@ namespace ProductosApp.Formularios
                 "Perez Soza", 23786.98M, DateTime.Now)
             {
                 CategoriaDocente = Domain.Enums.CategoriaDocente.Titular,
-                Id = empleadoServices.GetLastEmpleadoId() + 1
+                //d = empleadoServices.GetLastEmpleadoId() + 1
             };
 
             empleadoServices.Create(emp);
@@ -42,7 +42,7 @@ namespace ProductosApp.Formularios
                "Conda Jimenez", 337860.00M, DateTime.Now)
             {
                 HorasExtras = 23.5f,
-                Id = empleadoServices.GetLastEmpleadoId() + 1
+                //Id = empleadoServices.() + 1
             };
 
             empleadoServices.Create(emp);
