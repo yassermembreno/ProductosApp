@@ -19,13 +19,10 @@ namespace ProductosApp.Formularios.Inventories
         public IOrderItemService OrderItemService { get; set; }
         public IItemService ItemService { get; set; }
         public IProductService productService { get; set; }
+                
+        private int selectedOrderTypeIndex = -1;                
 
-        private int selectedProductIndex = -1;
-        private int selectedOrderTypeIndex = -1;        
-        private ComboBox cmbProduct;
-
-        private OrderItem[] orderItems;
-        private Item[] items;
+        private OrderItem[] orderItems;        
         
         public FrmOrder()
         {
@@ -34,27 +31,10 @@ namespace ProductosApp.Formularios.Inventories
 
         private void FrmOrder_Load(object sender, EventArgs e)
         {
-            cmbOrderType.Items.AddRange(Enum.GetValues(typeof(OrderType)).Cast<object>().ToArray());
-            //DataGridViewComboBoxColumn dgvcmbProduct = (DataGridViewComboBoxColumn)dgvOrderItem.Columns["ProductCol"];           
-            //dgvcmbProduct.Items.AddRange(productService.FindAll().Select(p => $"{p.Nombre} - {p.Descripcion}").ToList().ToArray());//Expresion lambda + LinQ
+            cmbOrderType.Items.AddRange(Enum.GetValues(typeof(OrderType)).Cast<object>().ToArray());            
             dgvOrderItem.Rows.Clear();
-            dgvProducts.DataSource = productService.FindAll();
-        }
-
-        private void dgvOrderItem_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {           
-            cmbProduct = e.Control as ComboBox;            
-        }
-
-        private void dgvOrderItem_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            if(cmbProduct == null)
-            {
-                return;
-            }
-
-            selectedProductIndex = cmbProduct.SelectedIndex;
-        }      
+            //dgvProducts.DataSource = productService.FindAll();
+        }        
 
         private void ShowMessageError(string message)
         {
@@ -63,9 +43,26 @@ namespace ProductosApp.Formularios.Inventories
         
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            int id = (int) dgvProducts.Rows[dgvProducts.CurrentCell.RowIndex].Cells[0].Value;
+            if (dgvProducts.Rows.Count == 0)
+            {
+                return;
+            }
+
+            int id = (int) dgvProducts.Rows[dgvProducts.CurrentRow.Index].Cells[0].Value;
             Producto p = productService.GetProductoById(id);
+            if(p == null)
+            {
+                ShowMessageError($"Error, no se pudo obtener el Producto con id: {id}.");
+                return;
+            }
+
             Item item = ItemService.FindByProductId(p.Id).Last();
+            if (item == null)
+            {
+                ShowMessageError($"Error, no se pudo obtener el Item del Producto: {p.Nombre}.");
+                return;
+            }
+
             OrderItem orderItem = new OrderItem(p, item, null )
             {
                 Id = OrderItemService.GetLastId(),
@@ -90,7 +87,7 @@ namespace ProductosApp.Formularios.Inventories
             dgvOrderRow.Cells[0].Value = $"{orderItem.Producto.Nombre} - {orderItem.Producto.Descripcion}";
             dgvOrderRow.Cells[1].Value = 0;
             dgvOrderRow.Cells[2].Value = selectedOrderTypeIndex == 1 ? orderItem.Item.MaximumRetailPrice : 0;
-            dgvOrderRow.Cells[3].Value = Math.Round(CalculateSubtotal((int)dgvOrderRow.Cells[1].Value , (decimal)dgvOrderRow.Cells[2].Value),2);
+            dgvOrderRow.Cells[3].Value = decimal.Round(CalculateSubtotal((int)dgvOrderRow.Cells[1].Value , (decimal)dgvOrderRow.Cells[2].Value),2);
             
             dgvOrderItem.Rows.Add(dgvOrderRow);
         }
@@ -144,7 +141,7 @@ namespace ProductosApp.Formularios.Inventories
                 }
 
                 DataTable dt = ConvertToDataTable();
-                dt.DefaultView.RowFilter = string.Format("Nombre LIKE '*{0}*' ", txtSearch.Text);
+                dt.DefaultView.RowFilter = string.Format("Nombre LIKE '*{0}*' OR UnidadMedida LIKE '*{0}*' OR Id = '{0}'", txtSearch.Text);
                 BindingSource bs = new BindingSource();
                 bs.DataSource = dt;
                 dgvProducts.DataSource = bs;

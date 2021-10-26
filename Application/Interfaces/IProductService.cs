@@ -10,6 +10,9 @@ namespace AppCore.Interfaces
     {
         Producto GetProductoById(int id);
         Producto[] GetProductosByUnidadMedida(MeasureUnit um);      
-        string GetProductosAsJson();        
+        string GetProductosAsJson();
+
+        ProductItem[] GetProductsItems();
+        ProductItem GetProductsItems(int productId);
     }
 }

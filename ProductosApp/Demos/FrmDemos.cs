@@ -37,7 +37,7 @@ namespace ProductosApp.Demos
                 Id = 1,
                 Nombre = "Leche Entera",
                 Descripcion = "Presentacion de 1 litro, 3% de grasa",
-                InventoryMethod = Domain.Enums.Inventories.InventoryMethod.PEPs,
+                InventoryMethod = Domain.Enums.Inventories.InventoryMethod.PEPS,
                 UnidadMedida = Domain.Enums.MeasureUnit.Litros
             };
 

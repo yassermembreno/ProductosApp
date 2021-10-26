@@ -6,7 +6,7 @@ namespace Domain.Enums.Inventories
 {
     public enum InventoryMethod
     {
-        PEPs,
+        PEPS,
         UEPS,
         SingleAverage
     }

@@ -10,6 +10,6 @@ namespace Domain.Interfaces
     {
         Producto GetProductoById(int id);
         Producto[] GetProductosByUnidadMedida(MeasureUnit um);
-        string GetProductosAsJson();        
+        string GetProductosAsJson();    
     }
 }

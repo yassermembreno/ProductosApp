@@ -60,7 +60,7 @@ namespace ProductosApp.Formularios.Inventories
                 Id = productService.GetLastId() + 1,
                 Nombre = "Coca-Cola",
                 Descripcion = "Presentacion de 1.5 litros",
-                InventoryMethod = Domain.Enums.Inventories.InventoryMethod.PEPs,
+                InventoryMethod = Domain.Enums.Inventories.InventoryMethod.PEPS,
                 UnidadMedida = Domain.Enums.MeasureUnit.Unidades
             };
 
@@ -71,11 +71,22 @@ namespace ProductosApp.Formularios.Inventories
                 Id = productService.GetLastId() + 1,
                 Nombre = "Fanta Naranja",
                 Descripcion = "Presentacion de 1.5 litros",
-                InventoryMethod = Domain.Enums.Inventories.InventoryMethod.PEPs,
+                InventoryMethod = Domain.Enums.Inventories.InventoryMethod.PEPS,
                 UnidadMedida = Domain.Enums.MeasureUnit.Unidades
             };
 
             productService.Create(p1);
+
+            Producto p2 = new Producto()
+            {
+                Id = productService.GetLastId() + 1,
+                Nombre = "Coca-Cola",
+                Descripcion = "Presentacion de 2.0 litros",
+                InventoryMethod = Domain.Enums.Inventories.InventoryMethod.PEPS,
+                UnidadMedida = Domain.Enums.MeasureUnit.Unidades
+            };
+
+            productService.Create(p2);
         }
 
         private void PopulateItems()
