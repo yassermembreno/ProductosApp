@@ -28,11 +28,13 @@ namespace ProductosApp
 
             builder.RegisterType<ProductoService>().As<IProductoService>();
             builder.RegisterType<ProductoModel>().As<IProductoModel>();
+
+            builder.RegisterType<ProductRepository>().As<IProductRepository>();
             var container = builder.Build();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmGestionEmpleados(container.Resolve<IEmpleadoService>()));
+            Application.Run(new FrmProductsDemo(container.Resolve<IProductRepository>()));
         }
     }
 }
